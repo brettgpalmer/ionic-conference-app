@@ -30,7 +30,9 @@ const routes: Routes = [
   {
     path: 'tutorial',
     loadChildren: './pages/tutorial/tutorial.module#TutorialModule'
-  }
+  },
+  { path: 'survey', loadChildren: './pages/survey/survey.module#SurveyPageModule' },
+  { path: 'survey-list', loadChildren: './pages/survey-list/survey-list.module#SurveyListPageModule' }
 ];
 
 @NgModule({

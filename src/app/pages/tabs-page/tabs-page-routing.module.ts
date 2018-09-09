@@ -9,6 +9,7 @@ import { SchedulePage } from '../schedule/schedule';
 import { SessionDetailPage } from '../session-detail/session-detail';
 import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
 import { SpeakerListPage } from '../speaker-list/speaker-list';
+import { SurveyListPage } from '../survey-list/survey-list.page';
 
 
 const routes: Routes = [
@@ -48,6 +49,12 @@ const routes: Routes = [
         path: 'map',
         component: MapPage,
         outlet: 'map'
+      },
+      // tab three.five
+      {
+        path: 'survey-list',
+        component: SurveyListPage,
+        outlet: 'survey-list'
       },
       // tab four
       {

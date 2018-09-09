@@ -24,6 +24,11 @@ export class AppComponent implements OnInit {
       url: '/app/tabs/(speakers:speakers)',
       icon: 'contacts'
     },
+    {
+      title: 'Surveys',
+      url: '/app/tabs/(survey-list:survey-list)',
+      icon: 'speedometer'
+    },
     { title: 'Map', url: '/app/tabs/(map:map)', icon: 'map' },
     {
       title: 'About',
@@ -100,6 +105,7 @@ export class AppComponent implements OnInit {
   }
 
   navigate(url: string) {
+    console.log('trying to navigate to: ' + url);
     return this.router.navigateByUrl(url);
   }
 
