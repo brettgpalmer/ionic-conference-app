@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './providers/auth.guard';
 
 const routes: Routes = [
   {
@@ -9,7 +10,8 @@ const routes: Routes = [
   },
   {
     path: 'account',
-    loadChildren: './pages/account/account.module#AccountModule'
+    loadChildren: './pages/account/account.module#AccountModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'support',
@@ -31,8 +33,16 @@ const routes: Routes = [
     path: 'tutorial',
     loadChildren: './pages/tutorial/tutorial.module#TutorialModule'
   },
-  { path: 'survey', loadChildren: './pages/survey/survey.module#SurveyPageModule' },
-  { path: 'survey-list', loadChildren: './pages/survey-list/survey-list.module#SurveyListPageModule' }
+  {
+    path: 'survey',
+    loadChildren: './pages/survey/survey.module#SurveyPageModule',
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'survey-list',
+    loadChildren: './pages/survey-list/survey-list.module#SurveyListPageModule',
+    canActivate: [AuthGuard]
+  }
 ];
 
 @NgModule({
