@@ -27,7 +27,8 @@ const routes: Routes = [
   },
   {
     path: 'app',
-    loadChildren: './pages/tabs-page/tabs-page.module#TabsModule'
+    loadChildren: './pages/tabs-page/tabs-page.module#TabsModule',
+    canActivate: [AuthGuard]
   },
   {
     path: 'tutorial',

@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { AuthService } from '../../providers/auth.service';
 import { UserData } from '../../providers/user-data';
 
 import { UserOptions } from '../../interfaces/user-options';
@@ -20,7 +20,8 @@ export class LoginPage {
 
   constructor(
     public userData: UserData,
-    public router: Router
+    public router: Router,
+    public authService: AuthService
   ) { }
 
   onLogin(form: NgForm) {
@@ -29,6 +30,16 @@ export class LoginPage {
     if (form.valid) {
       this.userData.login(this.login.username);
       this.router.navigateByUrl('/app/tabs/(schedule:schedule)');
+    }
+  }
+
+  anonymousLogin() {
+    try {
+      this.authService.anonymousLogin().then(() => {
+          this.router.navigateByUrl('/survey-list');
+      });
+    } catch (error) {
+        console.error(error);
     }
   }
 
