@@ -41,11 +41,30 @@ export class LoginPage {
     }
   }
 
-  importSpeakers() {
+  async importSpeakers() {
 
     this.loading = await this.loadingCtrl.create();
+    await this.loading.present();
 
-    this.speakersService.importSpeakers();
+    this.speakersService.resolveAfterSeconds(100).then(
+      () => {
+        this.loading.dismiss().then(() => {
+          console.log(`dismissing controller`);
+          this.router.navigateByUrl('/survey-list');
+        });
+      },
+      error => {
+        this.loading.dismiss().then(async () => {
+          const alert = await this.alertCtrl.create({
+            message: error.message,
+            buttons: [{ text: 'Ok', role: 'cancel' }],
+          });
+          await alert.present();
+        });
+      }
+    );
+
+    //this.speakersService.importSpeakers();
   }
 
   importOneSpeaker() {

@@ -63,12 +63,33 @@ export class SpeakersService {
 
   /* Run through list of speaker data and add to FB */
 
-  importSpeakers(): Promise<any> {
+  resolveAfterSeconds(x): Promise<any> {
+    return new Promise( resolve => {
+      setTimeout(() => {
+        resolve(x);
+      }, 2000);
+    });
+  }
+
+  getValueWithPromise() {
+    this.resolveAfterSeconds(20).then( value => {
+      console.log(`promise result: ${value}`);
+    });
+    console.log(`I will not wait until promise is resolved`);
+  }
+
+  //async mandatory if using 'await' keyword
+  async getValueWithAsync() {
+    const value = <number> await this.resolveAfterSeconds(30);
+    console.log(`async result: ${value}`);
+  }
+
+  /*importSpeakers(): Promise<any> {
 
     return this.http
       .get('assets/data/speaker_data.json')
       .pipe(map(this.processData, this));
-  }
+  } */
 
   processData(data: any) {
 
