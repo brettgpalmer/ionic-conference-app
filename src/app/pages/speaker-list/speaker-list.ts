@@ -5,6 +5,7 @@ import { ActionSheetController } from '@ionic/angular';
 
 import { ConferenceData } from '../../providers/conference-data';
 import { SpeakersService } from '../../providers/speakers.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'page-speaker-list',
@@ -15,6 +16,8 @@ import { SpeakersService } from '../../providers/speakers.service';
 export class SpeakerListPage {
   speakers: any[] = [];
 
+  public speakerList: Observable<any>;
+
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData,
@@ -24,9 +27,15 @@ export class SpeakerListPage {
 
   ) {}
 
+  ngOnInit() {
+    this.speakerList = this.speakersService.getSpeakerList().valueChanges();
+    console.log(`Finished ngOnInit()`);
+  }
+
   ionViewDidEnter() {
 
-    this.speakers = this.speakersService.getSpeakerList();
+    console.log(`entered ionViewDidEnter()`);
+    //this.speakers = this.speakersService.getSpeakerList();
     /* this.confData.getSpeakers().subscribe((speakers: any[]) => {
       this.speakers = speakers;
     }); */
