@@ -41,7 +41,7 @@ export class LoginPage {
     }
   }
 
-  async importSpeakers() {
+  async importSpeakersTest() {
 
     this.loading = await this.loadingCtrl.create();
     await this.loading.present();
@@ -64,7 +64,21 @@ export class LoginPage {
       }
     );
 
-    //this.speakersService.importSpeakers();
+  }
+
+
+  async importSpeakers() {
+
+    this.loading = await this.loadingCtrl.create();
+    await this.loading.present();
+
+    await this.speakersService.importSpeakers();
+
+    await this.loading.dismiss().then(() => {
+      console.log(`done importing speakers`);
+      this.router.navigateByUrl('/survey-list');
+    });
+
   }
 
   importOneSpeaker() {

@@ -78,18 +78,19 @@ export class SpeakersService {
     console.log(`I will not wait until promise is resolved`);
   }
 
-  //async mandatory if using 'await' keyword
+  // async mandatory if using 'await' keyword
   async getValueWithAsync() {
     const value = <number> await this.resolveAfterSeconds(30);
     console.log(`async result: ${value}`);
   }
 
-  /*importSpeakers(): Promise<any> {
+  importSpeakers(): Promise<any> {
 
     return this.http
       .get('assets/data/speaker_data.json')
-      .pipe(map(this.processData, this));
-  } */
+      .pipe(map(this.processData, this))
+      .toPromise();
+  }
 
   processData(data: any) {
 
@@ -103,10 +104,7 @@ export class SpeakersService {
           speaker.about,
           speaker.location,
           speaker.email,
-          speaker.phone)
-          .then(() => {
-            console.log( data );
-          });
+          speaker.phone);
       } catch (error) {
         console.error(error);
       }

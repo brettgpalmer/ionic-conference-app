@@ -4,6 +4,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ActionSheetController } from '@ionic/angular';
 
 import { ConferenceData } from '../../providers/conference-data';
+import { SpeakersService } from '../../providers/speakers.service';
 
 @Component({
   selector: 'page-speaker-list',
@@ -18,13 +19,19 @@ export class SpeakerListPage {
     public actionSheetCtrl: ActionSheetController,
     public confData: ConferenceData,
     public inAppBrowser: InAppBrowser,
-    public router: Router
+    public router: Router,
+    public speakersService: SpeakersService,
+
   ) {}
 
   ionViewDidEnter() {
-    this.confData.getSpeakers().subscribe((speakers: any[]) => {
+
+    this.speakers = this.speakersService.getSpeakerList();
+    /* this.confData.getSpeakers().subscribe((speakers: any[]) => {
       this.speakers = speakers;
-    });
+    }); */
+
+
   }
 
   goToSessionDetail(session: any) {
